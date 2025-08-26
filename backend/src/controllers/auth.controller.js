@@ -49,7 +49,7 @@ export const signup = async (req, res) => {
             });
         }
     } catch (error) {
-        console.error("Error in signup controller", error.message);
+        console.error("Error in signup controller: ", error.message);
         res.status(500).json({
             message: "Server error"
         });
