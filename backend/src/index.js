@@ -4,6 +4,7 @@
  import authRoutes from './routes/auth.route.js';
  import {connectDB} from './lib/db.js';
  import messageRoutes from './routes/message.route.js';
+ import cors from "cors"
 
 //  App initialization
  const app = express();
@@ -12,6 +13,10 @@
 // Middlewares
   app.use(express.json());
   app.use(cookieParser());
+  app.use(cors({
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+    credentials: true, // Allow cookies to be sent
+  }))
   
  //  Routes
  app.use("/api/auth", authRoutes);
