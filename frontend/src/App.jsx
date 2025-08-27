@@ -9,12 +9,12 @@ import SettingsPage from './pages/SettingsPage'
 import { useAuthStore } from './store/useAuthStore'
 
 const App = () => {
-  const { authUser, checkAuth } = useAuthStore()
+  const { authUser, CheckingAuth } = useAuthStore()
 
   useEffect(() => {
-    checkAuth()
+    CheckingAuth()
 
-  }, [checkAuth])
+  }, [CheckingAuth])
 console.log(authUser)
 
   return (
