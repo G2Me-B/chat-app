@@ -5,10 +5,10 @@
  import {connectDB} from './lib/db.js';
  import messageRoutes from './routes/message.route.js';
  import cors from "cors"
+import { app,server,io } from './lib/socket.js';
 
 //  App initialization
- const app = express();
- const PORT = process.env.PORT
+const PORT = process.env.PORT
 
 // Middlewares
   app.use(express.json({limit: '10mb'}));
@@ -22,7 +22,7 @@
  app.use("/api/auth", authRoutes);
  app.use("/api/messages", messageRoutes)
 
- app.listen(PORT, () => {
+ server.listen(PORT, () => {
    console.log(`Server is running on port ${PORT}`);
    connectDB();
  });
