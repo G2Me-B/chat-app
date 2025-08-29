@@ -8,14 +8,12 @@ import {
 
 
 
-export const useChatStore = create((set,get) => ({
+export const useChatStore = create((set, get) => ({
     messages: [],
     users: [],
     selectedUser: null,
     isUsersLoading: false,
     isMessagesLoading: false,
-
-
 
     getUsers: async () => {
         try {
@@ -43,7 +41,7 @@ export const useChatStore = create((set,get) => ({
                 messages: res.data
             })
         } catch (error) {
-            toast.error(error?.response?.data?.message || error.message)
+            toast.error(error?.response?.data?.message)
             console.log(error.message)
         } finally {
             set({
@@ -53,10 +51,15 @@ export const useChatStore = create((set,get) => ({
     },
 
     sendMessage: async (messageData) => {
-        const {selectedUser,messages} = get()
+        const {
+            selectedUser,
+            messages
+        } = get()
         try {
             const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
-            set({messages: [...messages,res.data]})
+            set({
+                messages: [...messages, res.data]
+            })
         } catch (error) {
             toast.error(error?.response?.data?.message || error.message)
             console.log(error.message)
@@ -64,8 +67,8 @@ export const useChatStore = create((set,get) => ({
     },
 
     // todo: optimize this later
-    setSelectedUser: (user) => {
-        set({selectedUser: user,messages: [] })
-    },
+    setSelectedUser: (selectedUser) => set({
+        selectedUser
+    })
 
 }))

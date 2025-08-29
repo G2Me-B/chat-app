@@ -70,18 +70,18 @@ export const login = async (req, res) => {
         });
 
         if (!user) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "Invalid credentials"
             });
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "Invalid credentials"
             });
         }
         generateToken(user._id, res);
-        res.status(200).json({
+        return res.status(200).json({
             message: "Login successful",
             user: user
         });
@@ -95,7 +95,7 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
     try {
-        res.clearCookie('token', {
+        res.clearCookie('jwt', {
             maxAge: 0,
             httpOnly: true,
             sameSite: 'strict', // or whatever you use in generateToken
