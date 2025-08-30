@@ -1,10 +1,6 @@
-import {
-    create
-} from 'zustand';
+import {create} from 'zustand';
 import toast from 'react-hot-toast';
-import {
-    axiosInstance
-} from '../lib/axios';
+import {axiosInstance} from '../lib/axios';
 import {useAuthStore} from "./useAuthStore";
 
 
@@ -17,10 +13,11 @@ export const useChatStore = create((set, get) => ({
     isMessagesLoading: false,
 
     getUsers: async () => {
+        set({ isUsersLoading: true });
         try {
             const res = await axiosInstance.get("/messages/users");
             set({
-                users: res.data
+                users: Array.isArray(res.data) ? res.data : []
             })
         } catch (error) {
             toast.error(error?.response?.data?.message || error.message)
