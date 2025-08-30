@@ -47,7 +47,7 @@ export const useAuthStore = create((set, get) => ({
             set({
                 authUser: res.data
             })
-            get().connectSocket(); // Connect socket after successful login
+            
             toast.success("Account created successfully");
             get().connectSocket(); // Connect socket after successful login
         } catch (error) {
@@ -90,7 +90,7 @@ export const useAuthStore = create((set, get) => ({
                 authUser: null
             })
             toast.success("Logged out successfully")
-            get.disconnectSocket(); // Disconnect socket on logout
+            get().disconnectSocket(); // Disconnect socket on logout
 
         } catch (error) {
             toast.error("Error in logging out", error.response.data.message)
