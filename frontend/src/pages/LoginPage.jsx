@@ -1,22 +1,20 @@
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from 'lucide-react';
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import { useAuthStore } from '../store/useAuthStore';
-import AuthImagePattern from '../components/AuthimagePattern';
+import { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
+import { Link } from "react-router-dom";
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  })
-
+    email: "",
+    password: "",
+  });
   const { login, isLoggingIn } = useAuthStore();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login(formData)
-  }
+    login(formData);
+  };
 
   return (
     <div className="h-screen grid lg:grid-cols-2">
@@ -115,7 +113,6 @@ const LoginPage = () => {
         subtitle={"Sign in to continue your conversations and catch up with your messages."}
       />
     </div>
-  )
-}
-
-export default LoginPage
+  );
+};
+export default LoginPage;
